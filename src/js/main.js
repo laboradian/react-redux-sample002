@@ -8,13 +8,17 @@ require('file-loader?name=../../dist/[name].[ext]!../index.html');
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import logger from 'redux-logger'
 import calcApp from './reducers'
 import Addition from './containers/Addition'
 import Multiplication from './containers/Multiplication'
 
 // store は1つだけ使う
-const store = createStore(calcApp)
+const store = createStore(
+  calcApp,
+  applyMiddleware(logger)
+)
 
 render(
   <Provider store={store}>
