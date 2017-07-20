@@ -15,10 +15,9 @@ import Addition from './containers/Addition'
 import Multiplication from './containers/Multiplication'
 
 // store は1つだけ使う
-const store = createStore(
-  calcApp,
-  applyMiddleware(logger)
-)
+const store = (process.env.NODE_ENV === 'development')
+  ? createStore(calcApp, applyMiddleware(logger))
+  : createStore(calcApp);
 
 render(
   <Provider store={store}>
